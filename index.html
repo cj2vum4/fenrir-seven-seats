@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#132733">
-  <meta name="description" content="七席圓環的手機3D舞台預覽。設定角色血量，檢視輪末換座與芬里爾模型樣本。">
+  <meta name="description" content="七席圓環的三輪單機戰鬥原型。設定血量、依序攻擊，並在輪末重新就座。">
   <title>諸神黃昏・七席舞台</title>
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./style.css?v=1c98aec6d670">
 </head>
 <body>
   <header class="masthead">
@@ -15,20 +15,22 @@
       <img src="./favicon.svg" alt="" width="38" height="38">
       <span><strong>諸神黃昏</strong><small>七席舞台</small></span>
     </a>
-    <div class="preview-mark"><span class="status-dot"></span>場地與角色預覽</div>
-    <button class="quiet-button header-reset" id="reset-all" type="button">還原示範</button>
+    <div class="preview-mark"><span class="status-dot"></span>三輪單機原型</div>
+    <button class="quiet-button header-reset" id="reset-all" type="button">重新開局</button>
   </header>
 
   <main class="workspace">
     <section class="stage-column" aria-labelledby="stage-title">
       <div class="stage-heading">
         <div><p class="section-kicker">眾神就座</p><h1 id="stage-title">七席之環</h1></div>
-        <span class="chapter">第 <strong>1</strong> 輪 <span>／ 輪末預覽</span></span>
+        <span class="chapter">第 <strong id="round-number">1</strong> 輪 <span id="phase-caption">／ 初始設定</span></span>
       </div>
+      <div class="battle-banner" id="battle-banner" aria-live="polite"><div><span id="battle-status">初始設定</span><strong id="battle-headline">設定七名角色的血量</strong></div><a href="#battle-controls">前往操作</a></div>
+      <div class="queue-strip"><span id="queue-title">預計順序</span><ol id="action-queue" aria-label="行動順序"></ol></div>
       <div class="stage" id="stage">
         <canvas id="arena" aria-label="七席3D舞台，可拖曳旋轉與雙指縮放"></canvas>
         <div class="labels" id="labels" aria-label="舞台角色"></div>
-        <div class="stage-topline"><span class="seat-note"><span></span>座位越高，血量排名越前</span><span id="model-badge" class="model-badge">準備模型樣本</span></div>
+        <div class="stage-topline"><span class="seat-note"><span></span>戰鬥中座位固定，輪末依血量換座</span><span id="model-badge" class="model-badge">準備模型樣本</span></div>
         <div id="stage-error" class="stage-error" hidden></div>
         <div class="camera-bar" role="group" aria-label="舞台鏡頭">
           <button type="button" data-view="overview" class="active" aria-pressed="true">全景</button>
@@ -50,25 +52,45 @@
         <label class="quality-label"><span>畫質</span><select id="quality" aria-label="畫質"><option value="balanced">標準</option><option value="low">省電</option></select></label>
       </div>
       <details class="preview-details"><summary>關於這個預覽</summary><div>
-        <p>這是單機場地預覽，血量設定只保存在目前瀏覽器。七席為固定高低位置，角色在輪末依血量重新就座。</p>
-        <p>芬里爾使用既有主檔匯出的靜態樣本，其餘角色使用站位替身；交易、戰鬥與多人同步將在後續版本加入。</p>
+        <p>這是三輪單機流程原型，由同一個瀏覽器輪流操作七名角色與主持人；進度只保存在目前瀏覽器。</p>
+        <p>普通攻擊固定造成 2 點傷害，用於測試行動流程。牌數、武器、技能、反應及交易尚未接入，也尚無多人同步或陣營勝負判定。</p>
+        <p>首輪同血量先用示範順位。後續同血量參照上一輪行動順序（包含放棄）；未行動者沿用原順位。輪末同血量先用該輪順位參照；這些未封版細節保留為示範處理。</p>
+        <p>芬里爾為靜態樣本，其餘六名為站位替身；正式場地、角色動作與實體手機效能仍待驗收。</p>
         <p id="asset-detail">模型資訊載入中。</p><p id="performance-detail"></p>
       </div></details>
     </section>
 
-    <aside class="host-panel" aria-labelledby="host-title">
-      <div class="panel-heading"><div><span class="host-label">主持人</span><h2 id="host-title">輪末血量設定</h2></div><span class="people-count">7 位角色</span></div>
-      <p class="panel-intro">調整血量後，套用這一輪的換座。<br>點選角色可在舞台上查看。</p>
+    <aside class="host-panel" id="battle-controls" aria-labelledby="host-title">
+      <div class="panel-heading"><div><span class="host-label">同一裝置輪流操作</span><h2 id="host-title">初始血量</h2></div><span class="people-count">7 位角色</span></div>
+      <ol class="round-progress" aria-label="三輪進度"><li data-round="1">第一輪</li><li data-round="2">第二輪</li><li data-round="3">第三輪</li></ol>
+      <p class="panel-intro" id="phase-description"></p>
+      <div class="phase-controls">
+        <button type="button" class="apply-button" id="setup-confirm">確定初始血量</button>
+        <button type="button" class="apply-button" id="start-battle" hidden>主持人開始第一輪戰鬥</button>
+        <button type="button" class="apply-button" id="advance-round" hidden>換座並進入下一輪準備</button>
+      </div>
+      <section class="action-panel" id="action-panel" aria-labelledby="action-title" hidden>
+        <div class="action-heading"><h3 id="action-title">目前行動者</h3><span id="actor-hp"></span></div>
+        <p class="attack-rule">普通攻擊：2 點傷害。選定目標後確認出招。</p>
+        <div class="target-grid" id="target-grid" role="group" aria-label="選擇攻擊目標"></div>
+        <p id="target-detail" class="target-detail" aria-live="polite">請選擇一名攻擊目標</p>
+        <button type="button" class="attack-button" id="attack-button" disabled>確認普通攻擊</button>
+        <button type="button" class="pass-button" id="pass-button">放棄本次行動</button>
+        <div class="pass-confirm" id="pass-confirm" hidden><p id="pass-question"></p><button type="button" id="confirm-pass">確認放棄</button><button type="button" id="cancel-pass">繼續選擇</button></div>
+      </section>
+      <p class="prototype-note">流程示範：普通攻擊固定 2 傷害，尚未計算牌數、武器與技能。</p>
+      <div class="roster-heading"><h3>七席血量</h3><span id="roster-hint">僅初始設定可修改</span></div>
       <div id="roster" class="roster" aria-label="角色血量"></div>
       <div class="rank-preview" id="rank-preview" hidden><h3>換座後的順序</h3><ol id="rank-list"></ol></div>
       <p class="tie-note" id="tie-note"></p>
-      <button type="button" id="apply-seats" class="apply-button" disabled><span>套用輪末換座</span><span aria-hidden="true">↗</span></button>
-      <p class="apply-hint" id="apply-hint">目前座位已按血量排列</p>
-      <button type="button" id="reset-preview" class="reset-preview">還原示範血量</button>
+      <section class="combat-record" aria-labelledby="record-title"><div class="record-heading"><h3 id="record-title">對戰紀錄</h3><span id="record-count">尚未開始</span></div><p id="record-empty">完成初始設定後，這裡會記錄每次行動。</p><ol id="combat-log" aria-label="對戰紀錄"></ol></section>
+      <section class="kill-record" aria-labelledby="kills-title"><h3 id="kills-title">擊殺紀錄</h3><p id="kills-empty">目前沒有擊殺</p><ul id="kill-list"></ul></section>
+      <button type="button" id="reset-preview" class="reset-preview">重新開局</button>
     </aside>
   </main>
-  <footer class="page-footer"><span>七席舞台・首版原型</span><span>Android / iPhone 瀏覽器預覽</span></footer>
+  <footer class="page-footer"><span>七席舞台・三輪單機原型</span><span>Android / iPhone 瀏覽器預覽</span></footer>
+  <dialog id="reset-dialog" class="reset-dialog" aria-labelledby="reset-title"><h2 id="reset-title">重新開局？</h2><p>目前瀏覽器的血量、輪次與對戰紀錄會清除，回到示範初始血量。</p><div><button type="button" id="cancel-reset">保留目前對戰</button><button type="button" id="confirm-reset">確定重新開局</button></div></dialog>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <script type="module" src="./app.js"></script>
+  <script type="module" src="./app.js?v=0d46e258b36a"></script>
 </body>
 </html>
