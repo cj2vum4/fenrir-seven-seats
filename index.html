@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#132733">
-  <meta name="description" content="七席圓環的三輪單機戰鬥原型。設定牌數與武器、選擇攻擊與範圍目標，並在輪末重新就座。">
+  <meta name="description" content="七席圓環的三輪單機戰鬥原型。設定牌數與武器，炎劍固定攻擊左右鄰座，並在輪末重新就座。">
   <title>諸神黃昏・七席舞台</title>
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="./style.css?v=4cafeb34d490">
+  <link rel="stylesheet" href="./style.css?v=452dc2eddb24">
 </head>
 <body>
   <header class="masthead">
@@ -54,7 +54,7 @@
       <details class="preview-details"><summary>關於這個預覽</summary><div>
         <p>這是三輪單機流程原型，由同一個瀏覽器輪流操作七名角色與主持人；進度只保存在目前瀏覽器。</p>
         <p>先確認初始道具，再設定血量。普通攻擊消耗 1 張力量牌造成 2 傷害，或 1 張魔法牌造成 1 傷害；戰斧消耗 1 張力量牌造成 3 傷害。武器本體不因使用而消失，每次攻擊最多使用一把武器。</p>
-        <p>炎劍使用 1 張力量牌，同時攻擊兩個合法目標，各 2 傷害。範圍按本輪固定座位判斷；已死亡角色仍佔座位。本版未處理角色技能與反應窗口。</p>
+        <p>炎劍使用 1 張力量牌，固定同時攻擊使用者左右兩側的角色，各 2 傷害。第 1 席與第 7 席相鄰；按本輪固定座位判斷，已死亡角色仍佔座位，不替換成其他存活者。本版未處理角色技能與反應窗口。</p>
         <p>擊殺時將死者剩餘力量／魔法牌及已接入的武器移交給擊殺者；已死亡者再次受攻擊不重複移交。沒有每輪自動補牌。尚未提供其他武器、角色技能、反應、交易、多人同步或陣營勝負判定。</p>
         <p>首輪同血量先用示範順位。後續同血量參照上一輪行動順序（包含放棄）；未行動者沿用原順位。輪末同血量先用該輪順位參照；這些未封版細節保留為示範處理。</p>
         <p>芬里爾為靜態樣本，其餘六名為站位替身；正式場地、角色動作與實體手機效能仍待驗收。</p>
@@ -66,13 +66,13 @@
       <div class="panel-heading"><div><span class="host-label">同一裝置輪流操作</span><h2 id="host-title">初始道具</h2></div><span class="people-count">7 位角色</span></div>
       <ol class="round-progress" aria-label="三輪進度"><li data-round="1">第一輪</li><li data-round="2">第二輪</li><li data-round="3">第三輪</li></ol>
       <p class="panel-intro" id="phase-description"></p>
-      <p class="version-notice" id="legacy-notice" hidden>這版新增道具結算，請從初始道具重新開局。舊版單機紀錄仍保留在這個瀏覽器，沒有被覆寫。</p>
+      <p class="version-notice" id="legacy-notice" hidden>炎劍規則已確認，這版從初始道具重新開局。舊版單機紀錄仍保留在這個瀏覽器，先前的測試範圍不會套入新局。</p>
       <section id="loadout-panel" class="loadout-panel" aria-labelledby="loadout-name">
         <label class="loadout-character">設定角色<select id="loadout-character" aria-label="設定道具的角色"></select></label>
         <h3 id="loadout-name">初始道具</h3>
         <div class="initial-cards"><label>力量牌<input type="number" id="initial-power" min="0" max="99" step="1" inputmode="numeric" aria-label="初始力量牌數"></label><label>魔法牌<input type="number" id="initial-magic" min="0" max="99" step="1" inputmode="numeric" aria-label="初始魔法牌數"></label></div>
         <fieldset class="initial-weapons"><legend>已接入的武器</legend><label><input type="checkbox" id="initial-axe"><span>戰斧<small id="owner-axe"></small></span></label><label><input type="checkbox" id="initial-flame"><span>炎劍<small id="owner-flame"></small></span></label></fieldset>
-        <fieldset class="flame-rule-settings" id="flame-rule-settings" hidden><legend>炎劍範圍</legend><p>相鄰細節尚待正式確認。這局先由主持人依實體規則選擇，系統不預設答案。</p><label>兩個目標<select id="flame-targeting" aria-label="炎劍目標規則"><option value="">請選擇</option><option value="pair">兩名彼此相鄰的其他角色</option><option value="flanks">使用者左右兩側的角色</option></select></label><label>第 1 席與第 7 席<select id="flame-circular" aria-label="炎劍首尾相鄰規則"><option value="">請選擇</option><option value="true">視為相鄰</option><option value="false">不視為相鄰</option></select></label></fieldset>
+        <p class="flame-fixed-rule" id="flame-fixed-rule" hidden>炎劍固定攻擊使用者左右兩側的角色，各 2 傷害。第 1 席與第 7 席相鄰，系統會自動標示兩個目標。</p>
         <p>每把武器只有一位持有者。請依實際發牌結果設定，未接入的道具暫不在此顯示。</p>
       </section>
       <div class="phase-controls">
@@ -106,6 +106,6 @@
   <footer class="page-footer"><span>七席舞台・三輪單機原型</span><span>Android / iPhone 瀏覽器預覽</span></footer>
   <dialog id="reset-dialog" class="reset-dialog" aria-labelledby="reset-title"><h2 id="reset-title">重新開局？</h2><p>本版的牌數、武器、血量、輪次與對戰紀錄會清除，回到初始道具設定。較舊版本的單機紀錄不會刪除。</p><div><button type="button" id="cancel-reset">保留目前對戰</button><button type="button" id="confirm-reset">確定重新開局</button></div></dialog>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <script type="module" src="./app.js?v=30fa739e25de"></script>
+  <script type="module" src="./app.js?v=73a21af14710"></script>
 </body>
 </html>
