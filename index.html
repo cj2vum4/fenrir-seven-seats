@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#132733">
+  <meta name="description" content="七席圓環的手機3D舞台預覽。設定角色血量，檢視輪末換座與芬里爾模型樣本。">
+  <title>諸神黃昏・七席舞台</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header class="masthead">
+    <a class="brand" href="./" aria-label="七席舞台首頁">
+      <img src="./favicon.svg" alt="" width="38" height="38">
+      <span><strong>諸神黃昏</strong><small>七席舞台</small></span>
+    </a>
+    <div class="preview-mark"><span class="status-dot"></span>場地與角色預覽</div>
+    <button class="quiet-button header-reset" id="reset-all" type="button">還原示範</button>
+  </header>
+
+  <main class="workspace">
+    <section class="stage-column" aria-labelledby="stage-title">
+      <div class="stage-heading">
+        <div><p class="section-kicker">眾神就座</p><h1 id="stage-title">七席之環</h1></div>
+        <span class="chapter">第 <strong>1</strong> 輪 <span>／ 輪末預覽</span></span>
+      </div>
+      <div class="stage" id="stage">
+        <canvas id="arena" aria-label="七席3D舞台，可拖曳旋轉與雙指縮放"></canvas>
+        <div class="labels" id="labels" aria-label="舞台角色"></div>
+        <div class="stage-topline"><span class="seat-note"><span></span>座位越高，血量排名越前</span><span id="model-badge" class="model-badge">準備模型樣本</span></div>
+        <div id="stage-error" class="stage-error" hidden></div>
+        <div class="camera-bar" role="group" aria-label="舞台鏡頭">
+          <button type="button" data-view="overview" class="active" aria-pressed="true">全景</button>
+          <button type="button" data-view="top" aria-pressed="false">俯視</button>
+          <button type="button" data-view="focus" aria-pressed="false">角色近看</button>
+          <span class="camera-divider"></span>
+          <button type="button" id="reset-camera" aria-label="重設鏡頭">復位</button>
+        </div>
+        <p class="gesture-hint">單指旋轉<span>・</span>雙指縮放</p>
+      </div>
+
+      <div class="selection-bar" id="selection-bar">
+        <img id="selected-portrait" class="selection-portrait" alt="">
+        <div class="selection-copy"><span id="selected-subtitle"></span><h2 id="selected-name"></h2><p id="selected-description"></p></div>
+        <div class="selection-hp"><small>血量</small><strong id="selected-hp"></strong><span id="selected-seat"></span></div>
+      </div>
+      <div class="stage-options">
+        <label class="model-toggle"><input id="fenrir-toggle" type="checkbox" checked><span>顯示芬里爾 3D 樣本</span></label>
+        <label class="quality-label"><span>畫質</span><select id="quality" aria-label="畫質"><option value="balanced">標準</option><option value="low">省電</option></select></label>
+      </div>
+      <details class="preview-details"><summary>關於這個預覽</summary><div>
+        <p>這是單機場地預覽，血量設定只保存在目前瀏覽器。七席為固定高低位置，角色在輪末依血量重新就座。</p>
+        <p>芬里爾使用既有主檔匯出的靜態樣本，其餘角色使用站位替身；交易、戰鬥與多人同步將在後續版本加入。</p>
+        <p id="asset-detail">模型資訊載入中。</p><p id="performance-detail"></p>
+      </div></details>
+    </section>
+
+    <aside class="host-panel" aria-labelledby="host-title">
+      <div class="panel-heading"><div><span class="host-label">主持人</span><h2 id="host-title">輪末血量設定</h2></div><span class="people-count">7 位角色</span></div>
+      <p class="panel-intro">調整血量後，套用這一輪的換座。<br>點選角色可在舞台上查看。</p>
+      <div id="roster" class="roster" aria-label="角色血量"></div>
+      <div class="rank-preview" id="rank-preview" hidden><h3>換座後的順序</h3><ol id="rank-list"></ol></div>
+      <p class="tie-note" id="tie-note"></p>
+      <button type="button" id="apply-seats" class="apply-button" disabled><span>套用輪末換座</span><span aria-hidden="true">↗</span></button>
+      <p class="apply-hint" id="apply-hint">目前座位已按血量排列</p>
+      <button type="button" id="reset-preview" class="reset-preview">還原示範血量</button>
+    </aside>
+  </main>
+  <footer class="page-footer"><span>七席舞台・首版原型</span><span>Android / iPhone 瀏覽器預覽</span></footer>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

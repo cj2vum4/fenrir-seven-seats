@@ -1,0 +1,813 @@
+{
+  "source": "phase2/89-orbit-shape/Fenrir_B89_Current.blend",
+  "source_sha256": "592fc7f7b66afc1648ca5778680e0563b5e9d86d1993004a9963fa5738dfd914",
+  "source_unchanged": true,
+  "source_frame": 45,
+  "format": "glTF 2.0 GLB",
+  "static_sample": true,
+  "file_bytes": 3547728,
+  "sha256": "a445aedcaf5720e42db73d1c223b577ddc6ee6caf3d8248e6d33656f7fdf83d4",
+  "triangles": 286754,
+  "exported_vertex_count_including_material_splits": 313253,
+  "mesh_count": 57,
+  "material_count": 29,
+  "texture_count": 22,
+  "maximum_texture_dimension": 1024,
+  "images": [
+    {
+      "name": "B21_BaseColor",
+      "original_size": [
+        1024,
+        1024
+      ],
+      "web_size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "B21_Metallic",
+      "original_size": [
+        1024,
+        1024
+      ],
+      "web_size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "B21_Normal_OpenGL",
+      "original_size": [
+        1024,
+        1024
+      ],
+      "web_size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "B21_Roughness",
+      "original_size": [
+        1024,
+        1024
+      ],
+      "web_size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "B61_BaseColor",
+      "original_size": [
+        4096,
+        4096
+      ],
+      "web_size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "B61_Metallic",
+      "original_size": [
+        4096,
+        4096
+      ],
+      "web_size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "B61_Roughness",
+      "original_size": [
+        4096,
+        4096
+      ],
+      "web_size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "B70_Metallic",
+      "original_size": [
+        2048,
+        2048
+      ],
+      "web_size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "B70_Roughness",
+      "original_size": [
+        2048,
+        2048
+      ],
+      "web_size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "B74_BaseColor",
+      "original_size": [
+        2048,
+        2048
+      ],
+      "web_size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "B75 current Body Normal_OpenGL",
+      "original_size": [
+        4096,
+        4096
+      ],
+      "web_size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "B85 BaseColor",
+      "original_size": [
+        2048,
+        2048
+      ],
+      "web_size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "B85 Normal OpenGL",
+      "original_size": [
+        2048,
+        2048
+      ],
+      "web_size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "B85 Roughness",
+      "original_size": [
+        2048,
+        2048
+      ],
+      "web_size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "B89_Normal_OpenGL",
+      "original_size": [
+        2048,
+        2048
+      ],
+      "web_size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "T_Fenrir_Armor_BaseColor",
+      "original_size": [
+        4096,
+        4096
+      ],
+      "web_size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "T_Fenrir_Armor_Metallic",
+      "original_size": [
+        4096,
+        4096
+      ],
+      "web_size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "T_Fenrir_Armor_Normal_OpenGL",
+      "original_size": [
+        4096,
+        4096
+      ],
+      "web_size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "T_Fenrir_Armor_Roughness",
+      "original_size": [
+        4096,
+        4096
+      ],
+      "web_size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "T_Fenrir_Cloth_BaseColor",
+      "original_size": [
+        2048,
+        2048
+      ],
+      "web_size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "T_Fenrir_Cloth_Normal_OpenGL",
+      "original_size": [
+        2048,
+        2048
+      ],
+      "web_size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "T_Fenrir_Detail_BaseColor",
+      "original_size": [
+        2048,
+        2048
+      ],
+      "web_size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "T_Fenrir_Detail_Metallic",
+      "original_size": [
+        2048,
+        2048
+      ],
+      "web_size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "T_Fenrir_Detail_Roughness",
+      "original_size": [
+        2048,
+        2048
+      ],
+      "web_size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "T_Fenrir_Head_BaseColor",
+      "original_size": [
+        4096,
+        4096
+      ],
+      "web_size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "T_Fenrir_Head_Metallic",
+      "original_size": [
+        4096,
+        4096
+      ],
+      "web_size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "T_Fenrir_Head_Normal_OpenGL_v039",
+      "original_size": [
+        4096,
+        4096
+      ],
+      "web_size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "T_Fenrir_Head_Roughness",
+      "original_size": [
+        4096,
+        4096
+      ],
+      "web_size": [
+        1024,
+        1024
+      ]
+    }
+  ],
+  "fur": [
+    {
+      "source_object": "V6_Groom_Mane_Color0",
+      "source_evaluated_curves": 42330,
+      "sampled_curves": 2600,
+      "crossed_ribbons": true,
+      "half_width_m": 0.0065
+    },
+    {
+      "source_object": "V6_Groom_Mane_Color1",
+      "source_evaluated_curves": 1367,
+      "sampled_curves": 220,
+      "crossed_ribbons": true,
+      "half_width_m": 0.004
+    },
+    {
+      "source_object": "V6_Groom_Mane_Color2",
+      "source_evaluated_curves": 1447,
+      "sampled_curves": 220,
+      "crossed_ribbons": true,
+      "half_width_m": 0.004
+    },
+    {
+      "source_object": "V6_Groom_Tail_Color0",
+      "source_evaluated_curves": 8610,
+      "sampled_curves": 600,
+      "crossed_ribbons": true,
+      "half_width_m": 0.0055
+    },
+    {
+      "source_object": "V6_Groom_Tail_Color1",
+      "source_evaluated_curves": 2137,
+      "sampled_curves": 140,
+      "crossed_ribbons": true,
+      "half_width_m": 0.0055
+    },
+    {
+      "source_object": "V6_Groom_Tail_Color2",
+      "source_evaluated_curves": 253,
+      "sampled_curves": 140,
+      "crossed_ribbons": true,
+      "half_width_m": 0.0055
+    },
+    {
+      "source_object": "V22 rigid head ear short fur",
+      "source_evaluated_curves": 3200,
+      "sampled_curves": 260,
+      "crossed_ribbons": false,
+      "half_width_m": 0.0018
+    },
+    {
+      "source_object": "P1 Scalp Undercoat",
+      "source_evaluated_curves": 22000,
+      "sampled_curves": 500,
+      "crossed_ribbons": false,
+      "half_width_m": 0.0026
+    },
+    {
+      "source_object": "V6_Groom_Body_B13_0_0",
+      "source_evaluated_curves": 92373,
+      "sampled_curves": 1400,
+      "crossed_ribbons": false,
+      "half_width_m": 0.0022
+    },
+    {
+      "source_object": "V6_Groom_Body_B13_0_1",
+      "source_evaluated_curves": 7027,
+      "sampled_curves": 160,
+      "crossed_ribbons": false,
+      "half_width_m": 0.0022
+    },
+    {
+      "source_object": "V6_Groom_Body_B13_0_2",
+      "source_evaluated_curves": 365,
+      "sampled_curves": 160,
+      "crossed_ribbons": false,
+      "half_width_m": 0.0022
+    },
+    {
+      "source_object": "V6_Groom_Body_B13_0_3",
+      "source_evaluated_curves": 660,
+      "sampled_curves": 160,
+      "crossed_ribbons": false,
+      "half_width_m": 0.0022
+    },
+    {
+      "source_object": "V6_Groom_Body_B13_1_0",
+      "source_evaluated_curves": 7048,
+      "sampled_curves": 160,
+      "crossed_ribbons": false,
+      "half_width_m": 0.0022
+    },
+    {
+      "source_object": "V6_Groom_Body_B13_1_1",
+      "source_evaluated_curves": 7968,
+      "sampled_curves": 160,
+      "crossed_ribbons": false,
+      "half_width_m": 0.0022
+    },
+    {
+      "source_object": "V6_Groom_Body_B13_1_2",
+      "source_evaluated_curves": 56,
+      "sampled_curves": 56,
+      "crossed_ribbons": false,
+      "half_width_m": 0.0022
+    },
+    {
+      "source_object": "V6_Groom_Body_B13_1_3",
+      "source_evaluated_curves": 82,
+      "sampled_curves": 82,
+      "crossed_ribbons": false,
+      "half_width_m": 0.0022
+    },
+    {
+      "source_object": "V6_Groom_Body_B13_2_0",
+      "source_evaluated_curves": 2180,
+      "sampled_curves": 160,
+      "crossed_ribbons": false,
+      "half_width_m": 0.0022
+    },
+    {
+      "source_object": "V6_Groom_Body_B13_2_1",
+      "source_evaluated_curves": 311,
+      "sampled_curves": 160,
+      "crossed_ribbons": false,
+      "half_width_m": 0.0022
+    },
+    {
+      "source_object": "V6_Groom_Body_B13_2_2",
+      "source_evaluated_curves": 1762,
+      "sampled_curves": 160,
+      "crossed_ribbons": false,
+      "half_width_m": 0.0022
+    },
+    {
+      "source_object": "V6_Groom_Body_B13_2_3",
+      "source_evaluated_curves": 77,
+      "sampled_curves": 77,
+      "crossed_ribbons": false,
+      "half_width_m": 0.0022
+    },
+    {
+      "source_object": "V6_Groom_Body_B13_3_0",
+      "source_evaluated_curves": 1176,
+      "sampled_curves": 160,
+      "crossed_ribbons": false,
+      "half_width_m": 0.0022
+    },
+    {
+      "source_object": "V6_Groom_Body_B13_3_1",
+      "source_evaluated_curves": 163,
+      "sampled_curves": 160,
+      "crossed_ribbons": false,
+      "half_width_m": 0.0022
+    },
+    {
+      "source_object": "V6_Groom_Body_B13_3_3",
+      "source_evaluated_curves": 52,
+      "sampled_curves": 52,
+      "crossed_ribbons": false,
+      "half_width_m": 0.0022
+    }
+  ],
+  "sampled_fur_curves": 7947,
+  "source_meshes": [
+    {
+      "source_object": "V38_Detail_PBR_Atlas",
+      "vertices": 13188,
+      "triangles": 26320
+    },
+    {
+      "source_object": "B41 normal-baked mask",
+      "vertices": 9586,
+      "triangles": 19176
+    },
+    {
+      "source_object": "Fenrir_Body_Low_Prototype",
+      "vertices": 13410,
+      "triangles": 26738
+    },
+    {
+      "source_object": "Sweeping tail",
+      "vertices": 80,
+      "triangles": 156
+    },
+    {
+      "source_object": "Fenrir_Armor_PBR_Atlas",
+      "vertices": 978,
+      "triangles": 1844
+    },
+    {
+      "source_object": "V14_Head_Low_Baked",
+      "vertices": 3714,
+      "triangles": 7304
+    },
+    {
+      "source_object": "V18 pinned waist cloth",
+      "vertices": 3510,
+      "triangles": 7008
+    },
+    {
+      "source_object": "Small teeth",
+      "vertices": 16,
+      "triangles": 28
+    },
+    {
+      "source_object": "Small teeth.001",
+      "vertices": 16,
+      "triangles": 28
+    },
+    {
+      "source_object": "Small teeth.002",
+      "vertices": 16,
+      "triangles": 28
+    },
+    {
+      "source_object": "Small teeth.003",
+      "vertices": 16,
+      "triangles": 28
+    },
+    {
+      "source_object": "Lower fang",
+      "vertices": 16,
+      "triangles": 28
+    },
+    {
+      "source_object": "Small teeth.004",
+      "vertices": 16,
+      "triangles": 28
+    },
+    {
+      "source_object": "Small teeth.005",
+      "vertices": 16,
+      "triangles": 28
+    },
+    {
+      "source_object": "Small teeth.006",
+      "vertices": 16,
+      "triangles": 28
+    },
+    {
+      "source_object": "Small teeth.007",
+      "vertices": 16,
+      "triangles": 28
+    },
+    {
+      "source_object": "Lower fang.001",
+      "vertices": 16,
+      "triangles": 28
+    },
+    {
+      "source_object": "Mouth dark interior",
+      "vertices": 362,
+      "triangles": 720
+    },
+    {
+      "source_object": "V3 almond eye",
+      "vertices": 43,
+      "triangles": 77
+    },
+    {
+      "source_object": "V3 almond eye.001",
+      "vertices": 43,
+      "triangles": 77
+    },
+    {
+      "source_object": "V3 inset turquoise nose",
+      "vertices": 266,
+      "triangles": 528
+    },
+    {
+      "source_object": "B42 iris -1",
+      "vertices": 1537,
+      "triangles": 2976
+    },
+    {
+      "source_object": "B42 pupil -1",
+      "vertices": 577,
+      "triangles": 1056
+    },
+    {
+      "source_object": "B42 iris 1",
+      "vertices": 1537,
+      "triangles": 2976
+    },
+    {
+      "source_object": "B42 pupil 1",
+      "vertices": 577,
+      "triangles": 1056
+    },
+    {
+      "source_object": "B07_Claw_thumb_r",
+      "vertices": 384,
+      "triangles": 764
+    },
+    {
+      "source_object": "B07_Claw_thumb_l",
+      "vertices": 384,
+      "triangles": 764
+    },
+    {
+      "source_object": "B07_Claw_ring_r",
+      "vertices": 384,
+      "triangles": 764
+    },
+    {
+      "source_object": "B07_Claw_ring_l",
+      "vertices": 384,
+      "triangles": 764
+    },
+    {
+      "source_object": "B07_Claw_pinky_r",
+      "vertices": 384,
+      "triangles": 764
+    },
+    {
+      "source_object": "B07_Claw_pinky_l",
+      "vertices": 384,
+      "triangles": 764
+    },
+    {
+      "source_object": "B07_Claw_middle_r",
+      "vertices": 384,
+      "triangles": 764
+    },
+    {
+      "source_object": "B07_Claw_middle_l",
+      "vertices": 384,
+      "triangles": 764
+    },
+    {
+      "source_object": "B07_Claw_index_r",
+      "vertices": 384,
+      "triangles": 764
+    },
+    {
+      "source_object": "B07_Claw_index_l",
+      "vertices": 384,
+      "triangles": 764
+    },
+    {
+      "source_object": "B04_Hand_Control_r",
+      "vertices": 4508,
+      "triangles": 8984
+    },
+    {
+      "source_object": "B04_Hand_Control_l",
+      "vertices": 4508,
+      "triangles": 8984
+    },
+    {
+      "source_object": "B16 cyan ribbon l -1",
+      "vertices": 260,
+      "triangles": 516
+    },
+    {
+      "source_object": "B16 cyan ribbon l 1",
+      "vertices": 260,
+      "triangles": 516
+    },
+    {
+      "source_object": "B16 cyan ribbon r -1",
+      "vertices": 260,
+      "triangles": 516
+    },
+    {
+      "source_object": "B16 cyan ribbon r 1",
+      "vertices": 260,
+      "triangles": 516
+    },
+    {
+      "source_object": "B22 baked knee l",
+      "vertices": 2247,
+      "triangles": 4490
+    },
+    {
+      "source_object": "B22 baked knee r",
+      "vertices": 2247,
+      "triangles": 4490
+    },
+    {
+      "source_object": "B45 hip l 1",
+      "vertices": 1514,
+      "triangles": 3024
+    },
+    {
+      "source_object": "B45 hip l 2",
+      "vertices": 1514,
+      "triangles": 3024
+    },
+    {
+      "source_object": "B45 hip r 1",
+      "vertices": 1514,
+      "triangles": 3024
+    },
+    {
+      "source_object": "B45 hip r 2",
+      "vertices": 1514,
+      "triangles": 3024
+    },
+    {
+      "source_object": "B46 shared pelvis waist",
+      "vertices": 8676,
+      "triangles": 17352
+    },
+    {
+      "source_object": "B78 cheek_sweep L",
+      "vertices": 204,
+      "triangles": 404
+    },
+    {
+      "source_object": "B78 cheek_sweep R",
+      "vertices": 204,
+      "triangles": 404
+    },
+    {
+      "source_object": "B78 lower_orbit L",
+      "vertices": 180,
+      "triangles": 356
+    },
+    {
+      "source_object": "B78 lower_orbit R",
+      "vertices": 180,
+      "triangles": 356
+    },
+    {
+      "source_object": "B78 nasal_side L",
+      "vertices": 396,
+      "triangles": 788
+    },
+    {
+      "source_object": "B78 nasal_side R",
+      "vertices": 402,
+      "triangles": 800
+    },
+    {
+      "source_object": "B78 upper_orbit L",
+      "vertices": 150,
+      "triangles": 296
+    },
+    {
+      "source_object": "B78 upper_orbit R",
+      "vertices": 150,
+      "triangles": 296
+    }
+  ],
+  "excluded_stage_objects": [
+    "Display plinth",
+    "Stage ring",
+    "Stage ring.001"
+  ],
+  "coordinate_system": "glTF Y-up; feet grounded; source front becomes +Z; app may normalise height",
+  "limitations": [
+    "Static frame45 sample: armature, corrective drivers and cloth simulation evaluated into meshes, not exported as runtime animation.",
+    "Native strand hair sampled into wide double-sided directed ribbons; this is a silhouette approximation, not production groom/hair-card acceptance.",
+    "Images downsampled to 1024 and re-encoded JPEG for this sample; surface and normal fidelity differ from the Blender master.",
+    "Historical unused mesh vertex-color/bake-mask layers omitted; current visible baked/scalar material inputs retained.",
+    "Original provisional art/material/UV and sampled collision limitations remain; no claim of production character completion.",
+    "Browser/device FPS and final multiplayer character budget require separate app measurements.",
+    "Draco geometry quantization applied; local DRACOLoader/decoder required in browser.",
+    "Procedural Blender material nodes are not generally portable to glTF; baked/scalar material inputs exported, not renderer equivalence."
+  ],
+  "elapsed_seconds": 153.44,
+  "glb_import_verified": true,
+  "imported_world_bounds_blender": [
+    [
+      -0.8061348795890808,
+      -0.6082927584648132,
+      0.0
+    ],
+    [
+      0.8061286211013794,
+      0.6082923412322998,
+      2.835096597671509
+    ]
+  ],
+  "visual_preview": "web/output/export-preview.png",
+  "uncompressed_file_bytes": 15989228,
+  "draco_required": true,
+  "draco_quantization": {
+    "position_bits": 14,
+    "normal_bits": 10,
+    "texcoord_bits": 12,
+    "color_bits": 10
+  },
+  "draco_roundtrip_bounds_max_difference_m": 6.258487701416016e-06,
+  "draco_imported_triangles_verified": 286754
+}
