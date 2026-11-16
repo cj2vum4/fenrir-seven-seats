@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#132733">
-  <meta name="description" content="七席圓環的三輪單機戰鬥原型。設定牌數與武器，炎劍固定攻擊左右鄰座，並在輪末重新就座。">
+  <meta name="description" content="七席圓環的三輪對戰原型。選擇單機試玩或加入連線房間，設定牌數與武器，並在輪末重新就座。">
   <title>諸神黃昏・七席舞台</title>
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="./style.css?v=452dc2eddb24">
+  <link rel="stylesheet" href="./style.css?v=cb13a534db2e">
 </head>
 <body>
   <header class="masthead">
@@ -15,9 +15,40 @@
       <img src="./favicon.svg" alt="" width="38" height="38">
       <span><strong>諸神黃昏</strong><small>七席舞台</small></span>
     </a>
-    <div class="preview-mark"><span class="status-dot"></span>三輪單機原型</div>
+    <div class="preview-mark"><span class="status-dot"></span><span id="prototype-badge">三輪對戰原型</span></div>
     <button class="quiet-button header-reset" id="reset-all" type="button">重新開局</button>
   </header>
+
+  <section class="room-panel" id="room-panel" aria-labelledby="room-title">
+    <div class="room-heading">
+      <h2 id="room-title">遊玩方式</h2>
+      <div class="room-modes" role="group" aria-label="遊玩方式">
+        <button type="button" id="room-mode-local" aria-pressed="true">單機試玩</button>
+        <button type="button" id="room-mode-online" aria-pressed="false">連線房間</button>
+      </div>
+    </div>
+    <p id="room-status" class="room-status" role="status" aria-live="polite" data-state="idle">目前使用單機模式。</p>
+    <div id="room-connect-fields" class="room-connect-fields" hidden>
+      <div class="room-service-field">
+        <label for="room-api-base">連線服務網址</label>
+        <input id="room-api-base" type="url" inputmode="url" value="https://fenrir-seven-seats-api.starfishlarp.workers.dev" placeholder="https://…（同一網站可留白）" autocomplete="url" autocapitalize="none" spellcheck="false" aria-describedby="room-service-hint">
+        <p id="room-service-hint">使用主持人提供的服務網址；留白會使用目前網站。</p>
+      </div>
+      <div class="room-entry-actions">
+        <div class="room-create-group"><button type="button" id="room-create" class="room-primary">我是主持人，建立房間</button><button type="button" id="room-resume" class="room-secondary">返回上次房間</button></div>
+        <div class="room-join-group">
+          <label for="room-code">房間代碼<input id="room-code" type="text" inputmode="text" maxlength="8" minlength="6" placeholder="6–8 碼" autocomplete="off" autocapitalize="characters" spellcheck="false"></label>
+          <label for="room-character">我的角色<select id="room-character"><option value="thor">托爾</option><option value="sif">希芙</option><option value="loki">洛基</option><option value="valkyrie">瓦基里</option><option value="heimdall">海姆達爾</option><option value="frigga">弗麗嘉</option><option value="fenrir">芬里爾</option></select></label>
+          <button type="button" id="room-join" class="room-primary">加入房間</button>
+        </div>
+      </div>
+    </div>
+    <div id="room-session" class="room-session" hidden>
+      <div class="room-session-heading"><div><span class="room-code-label">房間代碼</span><strong id="room-session-code"></strong><span id="room-session-role"></span></div><button type="button" id="room-leave" class="room-secondary">暫離房間</button></div>
+      <ul id="room-members" class="room-members" aria-label="房間角色與連線狀態"></ul>
+      <div id="room-takeover-controls" class="room-takeover-controls" hidden><p id="room-takeover-note">玩家超時或斷線時，主持人可接管目前行動者。</p><button type="button" id="room-takeover" class="room-secondary">接管目前行動者</button><button type="button" id="room-release" class="room-secondary" hidden>結束接管</button></div>
+    </div>
+  </section>
 
   <main class="workspace">
     <section class="stage-column" aria-labelledby="stage-title">
@@ -52,10 +83,10 @@
         <label class="quality-label"><span>畫質</span><select id="quality" aria-label="畫質"><option value="balanced">標準</option><option value="low">省電</option></select></label>
       </div>
       <details class="preview-details"><summary>關於這個預覽</summary><div>
-        <p>這是三輪單機流程原型，由同一個瀏覽器輪流操作七名角色與主持人；進度只保存在目前瀏覽器。</p>
+        <p>單機試玩由同一個瀏覽器輪流操作七名角色與主持人，進度保存在目前瀏覽器。連線模式加入共同房間後，由各玩家操作自己的角色，主持人負責初始設定、開戰與必要的接管；房間進度由連線服務保存。</p>
         <p>先確認初始道具，再設定血量。普通攻擊消耗 1 張力量牌造成 2 傷害，或 1 張魔法牌造成 1 傷害；戰斧消耗 1 張力量牌造成 3 傷害。武器本體不因使用而消失，每次攻擊最多使用一把武器。</p>
         <p>炎劍使用 1 張力量牌，固定同時攻擊使用者左右兩側的角色，各 2 傷害。第 1 席與第 7 席相鄰；按本輪固定座位判斷，已死亡角色仍佔座位，不替換成其他存活者。本版未處理角色技能與反應窗口。</p>
-        <p>擊殺時將死者剩餘力量／魔法牌及已接入的武器移交給擊殺者；已死亡者再次受攻擊不重複移交。沒有每輪自動補牌。尚未提供其他武器、角色技能、反應、交易、多人同步或陣營勝負判定。</p>
+        <p>擊殺時將死者剩餘力量／魔法牌及已接入的武器移交給擊殺者；已死亡者再次受攻擊不重複移交。沒有每輪自動補牌。尚未提供其他武器、角色技能、反應、交易或陣營勝負判定。</p>
         <p>首輪同血量先用示範順位。後續同血量參照上一輪行動順序（包含放棄）；未行動者沿用原順位。輪末同血量先用該輪順位參照；這些未封版細節保留為示範處理。</p>
         <p>芬里爾為靜態樣本，其餘六名為站位替身；正式場地、角色動作與實體手機效能仍待驗收。</p>
         <p id="asset-detail">模型資訊載入中。</p><p id="performance-detail"></p>
@@ -63,7 +94,7 @@
     </section>
 
     <aside class="host-panel" id="battle-controls" aria-labelledby="host-title">
-      <div class="panel-heading"><div><span class="host-label">同一裝置輪流操作</span><h2 id="host-title">初始道具</h2></div><span class="people-count">7 位角色</span></div>
+      <div class="panel-heading"><div><span class="host-label" id="room-mode-caption">同一裝置輪流操作</span><h2 id="host-title">初始道具</h2></div><span class="people-count">7 位角色</span></div>
       <ol class="round-progress" aria-label="三輪進度"><li data-round="1">第一輪</li><li data-round="2">第二輪</li><li data-round="3">第三輪</li></ol>
       <p class="panel-intro" id="phase-description"></p>
       <p class="version-notice" id="legacy-notice" hidden>炎劍規則已確認，這版從初始道具重新開局。舊版單機紀錄仍保留在這個瀏覽器，先前的測試範圍不會套入新局。</p>
@@ -81,6 +112,34 @@
         <button type="button" class="apply-button" id="start-battle" hidden>主持人開始第一輪戰鬥</button>
         <button type="button" class="apply-button" id="advance-round" hidden>換座並進入下一輪準備</button>
       </div>
+      <section class="trade-panel" id="trade-panel" aria-labelledby="trade-title" hidden>
+        <div class="trade-heading"><h3 id="trade-title">戰前交易</h3><span id="trade-round-label"></span></div>
+        <p id="trade-rule" class="trade-rule"></p>
+        <p id="trade-role-note" class="trade-role-note"></p>
+        <p id="trade-message" class="trade-message" role="status" aria-live="polite" hidden></p>
+        <form id="trade-form" class="trade-form" hidden>
+          <label class="trade-recipient-label">交易對象<select id="trade-recipient" aria-label="交易對象"></select></label>
+          <div class="trade-bundles">
+            <fieldset><legend>我交出</legend>
+              <div class="trade-card-inputs" id="trade-give-cards"><label>力量牌<input id="trade-give-power" type="number" min="0" step="1" value="0" inputmode="numeric" aria-label="我交出的力量牌數"></label><label>魔法牌<input id="trade-give-magic" type="number" min="0" step="1" value="0" inputmode="numeric" aria-label="我交出的魔法牌數"></label></div>
+              <div class="trade-weapons"><label><input id="trade-give-axe" type="checkbox">戰斧</label><label><input id="trade-give-flame" type="checkbox">炎劍</label></div>
+              <small id="trade-give-stock" class="trade-stock"></small>
+            </fieldset>
+            <fieldset><legend>希望對方交出</legend>
+              <div class="trade-card-inputs" id="trade-receive-cards"><label>力量牌<input id="trade-receive-power" type="number" min="0" step="1" value="0" inputmode="numeric" aria-label="希望收到的力量牌數"></label><label>魔法牌<input id="trade-receive-magic" type="number" min="0" step="1" value="0" inputmode="numeric" aria-label="希望收到的魔法牌數"></label></div>
+              <div class="trade-weapons"><label><input id="trade-receive-axe" type="checkbox">戰斧</label><label><input id="trade-receive-flame" type="checkbox">炎劍</label></div>
+              <small id="trade-receive-stock" class="trade-stock"></small>
+            </fieldset>
+          </div>
+          <p id="trade-preview" class="trade-preview" aria-live="polite"></p>
+          <button id="trade-propose" class="trade-propose" type="submit">送出交換提案</button>
+          <p class="trade-help">希望對方交出「無」就是贈送。提案不會預留物品，對方接受時才檢查並一起移轉。</p>
+        </form>
+        <div class="trade-list-heading"><h4>待確認提案</h4><span id="trade-pending-count"></span></div>
+        <p id="trade-empty" class="trade-empty">目前沒有待確認的交易。</p>
+        <ul id="trade-list" class="trade-list" aria-label="待確認交易"></ul>
+        <details id="trade-history" class="trade-history" hidden><summary>最近的交易紀錄</summary><ul id="trade-history-list" class="trade-list" aria-label="交易歷史"></ul></details>
+      </section>
       <section class="action-panel" id="action-panel" aria-labelledby="action-title" hidden>
         <div class="action-heading"><h3 id="action-title">目前行動者</h3><span id="actor-hp"></span></div>
         <p id="actor-cards" class="actor-cards"></p>
@@ -103,9 +162,9 @@
       <button type="button" id="reset-preview" class="reset-preview">重新開局</button>
     </aside>
   </main>
-  <footer class="page-footer"><span>七席舞台・三輪單機原型</span><span>Android / iPhone 瀏覽器預覽</span></footer>
+  <footer class="page-footer"><span>七席舞台・三輪原型</span><span>Android / iPhone 瀏覽器預覽</span></footer>
   <dialog id="reset-dialog" class="reset-dialog" aria-labelledby="reset-title"><h2 id="reset-title">重新開局？</h2><p>本版的牌數、武器、血量、輪次與對戰紀錄會清除，回到初始道具設定。較舊版本的單機紀錄不會刪除。</p><div><button type="button" id="cancel-reset">保留目前對戰</button><button type="button" id="confirm-reset">確定重新開局</button></div></dialog>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <script type="module" src="./app.js?v=73a21af14710"></script>
+  <script type="module" src="./app.js?v=2c381601785f"></script>
 </body>
 </html>
