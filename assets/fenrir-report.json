@@ -2,12 +2,12 @@
   "format": "glTF 2.0 GLB",
   "static_sample": true,
   "mobile_sample": true,
-  "file_bytes": 3440824,
-  "sha256": "0034e6648342e170e3820438ac04d1eccc297dccf01b328d99d42f151752d0f4",
-  "triangles": 233517,
-  "mesh_count": 29,
-  "primitive_count": 29,
-  "material_count": 29,
+  "file_bytes": 3894212,
+  "sha256": "14f4d6adfd48e8e214a425fdede6e691a737d31bba2a1fb8c8b4866e4d1007e6",
+  "triangles": 307467,
+  "mesh_count": 39,
+  "primitive_count": 39,
+  "material_count": 26,
   "texture_count": 22,
   "image_count": 22,
   "texture_bindings": 22,
@@ -214,6 +214,22 @@
   ],
   "draco_required": true,
   "limitations": [
-    "Static mobile web sample; physical-device performance and complete game acceptance remain pending."
-  ]
+    "Static two-level mobile web sample; only one display level is active at a time. Stored triangle totals differ from active rendering.",
+    "Both levels share textures. Physical-device performance and complete game acceptance remain pending."
+  ],
+  "lod_levels": [
+    {
+      "level": "detail",
+      "node": "CharacterDetail",
+      "triangles": 233517,
+      "primitive_count": 29
+    },
+    {
+      "level": "overview",
+      "node": "CharacterOverview",
+      "triangles": 144678,
+      "primitive_count": 29
+    }
+  ],
+  "default_lod_level": "detail"
 }
